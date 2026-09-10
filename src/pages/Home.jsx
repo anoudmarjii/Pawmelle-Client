@@ -12,12 +12,14 @@ import ownerPetImage from "../assets/owner-pet.png";
 
 import "./Home.css";
 
+const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
 const Home = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
         axios
-            .get("http://localhost:5000/api/services")
+            .get(`${BASE_URL}/api/services`)
             .then((response) => {
                 setServices(response.data);
             })

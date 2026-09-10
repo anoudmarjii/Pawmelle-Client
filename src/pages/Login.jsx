@@ -9,6 +9,8 @@ import loginImg from "../assets/login.png";
 
 import "./Login.css";
 
+const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +23,7 @@ const Login = () => {
 
     axios
       .post(
-        "http://localhost:5000/api/auth/login",
+        `${BASE_URL}/api/auth/login`,
         {
           email,
           password,
@@ -36,7 +38,13 @@ const Login = () => {
         setMessage("Login successful");
 
         // Temporary until booking/profile pages are created
-        navigate("/");
+        const user = response.data.user;
+
+        if (user.role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
       })
       .catch((error) => {
         console.error(error);
