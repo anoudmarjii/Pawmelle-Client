@@ -1,0 +1,634 @@
+.profile-page {
+    width: calc(100% - 140px);
+    max-width: 1300px;
+    margin: 45px auto 70px;
+}
+
+
+/* =========================
+   Heading
+========================= */
+
+.profile-heading {
+    margin-bottom: 45px;
+}
+
+.profile-heading h1 {
+    font-family: "DM Serif Display", serif;
+    font-size: 40px;
+    margin-bottom: 4px;
+    color: var(--text);
+}
+
+.profile-heading p {
+    font-size: 15px;
+    color: #737373;
+}
+
+
+/* =========================
+   Owner Information
+========================= */
+
+.owner-card {
+    width: 65%;
+    min-height: 185px;
+
+    padding: 32px 38px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: var(--white);
+    border: 1px solid #d1d1d1;
+    border-radius: 24px;
+}
+
+.owner-card h2 {
+    font-family: "DM Serif Display", serif;
+    font-size: 24px;
+    margin-bottom: 2px;
+}
+
+.owner-role {
+    font-size: 13px;
+    color: #808080;
+}
+
+.owner-details {
+    display: flex;
+    gap: 90px;
+    margin-top: 25px;
+}
+
+.owner-details span {
+    font-size: 12px;
+    font-weight: 600;
+    color: #737373;
+}
+
+.owner-details p {
+    margin: 4px 0 0;
+    font-size: 14px;
+}
+
+.outline-btn {
+    padding: 11px 24px;
+
+    background-color: var(--white);
+    border: 1px solid #d1d1d1;
+    border-radius: 22px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   Pets
+========================= */
+
+.pets-section {
+    margin-top: 50px;
+}
+
+.section-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.section-title-row h2,
+.appointments-section h2 {
+    font-family: "DM Serif Display", serif;
+    font-size: 30px;
+    margin-bottom: 3px;
+}
+
+.section-title-row p,
+.appointments-section > p {
+    font-size: 14px;
+    color: #808080;
+}
+
+.primary-profile-btn {
+    padding: 12px 26px;
+
+    border: none;
+    border-radius: 22px;
+
+    background-color: var(--dark-green);
+    color: var(--white);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.primary-profile-btn:hover {
+    background-color: var(--primary);
+    color: var(--dark-green);
+}
+
+
+.pets-grid {
+    margin-top: 25px;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.pet-card {
+    min-height: 180px;
+
+    padding: 30px 36px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: var(--white);
+    border: 1px solid #d1d1d1;
+    border-radius: 22px;
+}
+
+.pet-info h3 {
+    font-family: "DM Serif Display", serif;
+    font-size: 22px;
+    margin-bottom: 7px;
+}
+
+.pet-info > p {
+    font-size: 14px;
+}
+
+.pet-age {
+    margin-top: 25px;
+}
+
+.pet-age span {
+    font-size: 12px;
+    font-weight: 600;
+    color: #737373;
+}
+
+.pet-age p {
+    margin-top: 3px;
+    font-size: 14px;
+}
+
+
+.pet-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.small-outline-btn {
+    width: 92px;
+    height: 36px;
+
+    background-color: var(--white);
+    border: 1px solid #383838;
+    border-radius: 18px;
+
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   Appointments
+========================= */
+
+.appointments-section {
+    margin-top: 55px;
+}
+
+.edit-profile-form {
+    width: 100%;
+}
+
+.edit-profile-fields {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.edit-profile-fields div {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-profile-fields label {
+    margin-bottom: 6px;
+
+    font-size: 12px;
+    font-weight: 600;
+    color: #737373;
+}
+
+.edit-profile-fields input {
+    height: 44px;
+
+    padding: 0 12px;
+
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+
+    font-size: 13px;
+}
+
+.edit-profile-fields input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.edit-profile-buttons {
+    display: flex;
+    gap: 12px;
+
+    margin-top: 22px;
+}
+
+.profile-message {
+    margin-top: 10px;
+
+    font-size: 13px;
+    color: var(--dark-green);
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 900px) {
+
+    .profile-page {
+        width: calc(100% - 50px);
+    }
+
+    .owner-card {
+        width: 100%;
+    }
+
+    .pets-grid {
+        grid-template-columns: 1fr;
+    }
+    .edit-profile-fields {
+    grid-template-columns: 1fr;
+    }
+    .add-pet-fields {
+    grid-template-columns: 1fr;
+    }  
+    
+    .edit-pet-fields {
+    grid-template-columns: 1fr;
+}
+}
+
+
+@media (max-width: 600px) {
+
+    .profile-page {
+        width: calc(100% - 30px);
+        margin-top: 30px;
+    }
+
+    .profile-heading h1 {
+        font-size: 34px;
+    }
+
+    .owner-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 25px;
+
+        padding: 28px 24px;
+    }
+
+    .owner-details {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .section-title-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .pet-card {
+        padding: 25px 22px;
+    }
+
+    .edit-profile-fields {
+    grid-template-columns: 1fr;
+    }
+
+    .add-pet-fields {
+    grid-template-columns: 1fr;
+    }
+
+    .edit-pet-fields {
+    grid-template-columns: 1fr;
+}
+}
+
+
+/* adding pet */
+.add-pet-form {
+    margin-top: 25px;
+    padding: 25px;
+
+    background-color: var(--white);
+    border: 1px solid #d1d1d1;
+    border-radius: 22px;
+}
+
+.add-pet-fields {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.add-pet-fields div {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-pet-fields label {
+    margin-bottom: 6px;
+
+    font-size: 12px;
+    font-weight: 600;
+    color: #737373;
+}
+
+.add-pet-fields input {
+    height: 44px;
+
+    padding: 0 12px;
+
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+
+    font-size: 13px;
+}
+
+.add-pet-fields input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.add-pet-buttons {
+    display: flex;
+    gap: 12px;
+
+    margin-top: 20px;
+}
+
+
+/* editing pet info */
+.edit-pet-form {
+    width: 100%;
+}
+
+.edit-pet-fields {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.edit-pet-fields div {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-pet-fields label {
+    margin-bottom: 6px;
+
+    font-size: 12px;
+    font-weight: 600;
+    color: #737373;
+}
+
+.edit-pet-fields input {
+    height: 42px;
+
+    padding: 0 10px;
+
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+
+    font-size: 13px;
+}
+
+.edit-pet-fields input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.edit-pet-buttons {
+    display: flex;
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+
+/* appointments */
+.appointments-table-wrapper {
+    margin-top: 25px;
+    overflow-x: auto;
+
+    background-color: var(--white);
+    border: 1px solid #d1d1d1;
+    border-radius: 20px;
+
+    padding: 18px;
+}
+
+.appointments-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
+}
+
+.appointments-table th {
+    padding: 14px 16px;
+
+    background-color: #f0f0f0;
+
+    font-size: 12px;
+    font-weight: 600;
+    color: #595959;
+
+    text-align: left;
+}
+
+.appointments-table td {
+    padding: 16px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    font-size: 13px;
+}
+
+.appointments-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* Status */
+
+.appointment-status {
+    display: inline-block;
+
+    padding: 7px 16px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-transform: capitalize;
+}
+
+.appointment-status.pending {
+    background-color: #fff0c2;
+}
+
+.appointment-status.accepted {
+    background-color: #d9f2e6;
+}
+
+.appointment-status.rejected {
+    background-color: #f8d7da;
+}
+
+.appointment-status.cancelled {
+    background-color: #e4e4e4;
+}
+
+
+.no-appointments {
+    margin-top: 25px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    background-color: var(--white);
+    border: 1px solid #d1d1d1;
+    border-radius: 20px;
+
+    font-size: 14px;
+    color: #737373;
+}
+
+
+/* logout */
+.profile-heading-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-logout-btn {
+    padding: 10px 24px;
+
+    border: none;
+    border-radius: 22px;
+
+    background-color: var(--dark-green);
+    color: white;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* responsive */
+/* =========================
+   Responsive Profile
+========================= */
+
+@media (max-width: 900px) {
+
+    .profile-page {
+        width: calc(100% - 50px);
+    }
+
+    .owner-card {
+        width: 100%;
+    }
+
+    .pets-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .edit-profile-fields,
+    .add-pet-fields,
+    .edit-pet-fields {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .profile-page {
+        width: calc(100% - 30px);
+        margin-top: 30px;
+    }
+
+    .profile-heading-row {
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .profile-heading h1 {
+        font-size: 34px;
+    }
+
+    .profile-logout-btn {
+        padding: 9px 18px;
+    }
+
+    .owner-card {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 25px;
+        padding: 28px 24px;
+    }
+
+    .owner-details {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .section-title-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .pet-card {
+        padding: 25px 22px;
+    }
+
+    .appointments-table-wrapper {
+        overflow-x: auto;
+    }
+}
