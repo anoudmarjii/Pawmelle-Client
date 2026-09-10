@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import Navbar from "../components/navbar";
 import ServiceCard from "../components/ServiceCard";
@@ -29,6 +30,8 @@ const Home = () => {
         console.log("Selected service:", service);
     };
 
+    const navigate = useNavigate();
+
 
     return (
         <div id="home">
@@ -45,9 +48,12 @@ const Home = () => {
                     <p>Simple, reliable care for your pet — all in one place.</p>
 
                     <div className="hero-buttons">
-                        <a href="#services" className="primary-btn">
+                        <button
+                            className="primary-btn"
+                            onClick={() => navigate("/booking")}
+                        >
                             Book Appointment →
-                        </a>
+                        </button>
 
                         <a href="#services" className="secondary-btn">
                             Our Services →
@@ -83,7 +89,9 @@ const Home = () => {
                         <ServiceCard
                             key={service.id}
                             service={service}
-                            onBook={handleBook}
+                            onBook={() =>
+                                navigate(`/booking?service=${service.id}`)
+                            }
                         />
                     ))}
 
