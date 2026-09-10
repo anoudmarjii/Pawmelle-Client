@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 import "./Booking.css";
