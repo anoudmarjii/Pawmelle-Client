@@ -42,7 +42,7 @@ const ServiceCard = ({ service, onBook }) => {
 
       <button
         className="service-book-btn"
-        onClick={() => onBook(service)}
+        onClick={onBook}
       >
         Book Now →
       </button>

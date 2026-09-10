@@ -48,9 +48,9 @@ const Navbar = () => {
         >
           <div className="navbar-nav ms-auto navbar-links">
             <Link to="/" className="nav-link">Home</Link>
-            <a href="#services" className="nav-link">Services</a>
-            <a href="#how-it-works" className="nav-link">How It Works</a>
-            <a href="#contact" className="nav-link">Contact</a>
+            <a href="/#services" className="nav-link">Services</a>
+            <a href="/#how-it-works" className="nav-link">How It Works</a>
+            <a href="/#contact" className="nav-link">Contact</a>
 
             {user ? (
               <Link to="/profile" className="nav-link">
