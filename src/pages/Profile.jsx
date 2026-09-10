@@ -7,6 +7,8 @@ import Footer from "../components/Footer";
 
 import "./Profile.css";
 
+const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
 const Profile = () => {
     const [user, setUser] = useState(null);
     const [pets, setPets] = useState([]);
@@ -32,11 +34,17 @@ const Profile = () => {
 
     const navigate = useNavigate();
 
+    const [petToDelete, setPetToDelete] = useState(null);
+
+    // for extrenal API
+    const [temperature, setTemperature] = useState(null);
+    const [weatherError, setWeatherError] = useState("");
+
     useEffect(() => {
 
         // Get logged-in user
         axios
-            .get("http://localhost:5000/api/auth/me", {
+            .get(`${BASE_URL}/api/auth/me`, {
                 withCredentials: true
             })
             .then((response) => {
@@ -44,7 +52,7 @@ const Profile = () => {
 
                 // Get user's pets
                 return axios.get(
-                    "http://localhost:5000/api/pets",
+                    `${BASE_URL}/api/pets`,
                     {
                         withCredentials: true
                     }
@@ -54,7 +62,7 @@ const Profile = () => {
                 setPets(response.data);
 
                 return axios.get(
-                    "http://localhost:5000/api/appointments",
+                    `${BASE_URL}/api/appointments`,
                     {
                         withCredentials: true
                     }
@@ -77,6 +85,22 @@ const Profile = () => {
 
     }, [navigate]);
 
+    useEffect(() => {
+        axios
+            .get(
+                "https://api.open-meteo.com/v1/forecast?latitude=31.95&longitude=35.91&current=temperature_2m&timezone=auto"
+            )
+            .then((response) => {
+                setTemperature(
+                    response.data.current.temperature_2m
+                );
+            })
+            .catch((error) => {
+                console.error(error);
+                setWeatherError("Weather unavailable");
+            });
+    }, []);
+
 
     const handleEditProfile = () => {
         setEditName(user.name);
@@ -92,7 +116,7 @@ const Profile = () => {
 
         axios
             .put(
-                "http://localhost:5000/api/users/profile",
+                `${BASE_URL}/api/users/profile`,
                 {
                     name: editName,
                     email: editEmail,
@@ -124,7 +148,7 @@ const Profile = () => {
 
         axios
             .post(
-                "http://localhost:5000/api/pets",
+                `${BASE_URL}/api/pets`,
                 {
                     species: newSpecies,
                     breed: newBreed,
@@ -176,7 +200,7 @@ const Profile = () => {
 
         axios
             .put(
-                `http://localhost:5000/api/pets/${petId}`,
+                `${BASE_URL}/api/pets/${petId}`,
                 {
                     species: editSpecies,
                     breed: editBreed,
@@ -213,31 +237,21 @@ const Profile = () => {
 
 
     const handleDeletePet = (petId) => {
-
-        const confirmDelete = window.confirm(
-            "Are you sure you want to delete this pet?"
-        );
-
-        if (!confirmDelete) {
-            return;
-        }
-
         axios
             .delete(
-                `http://localhost:5000/api/pets/${petId}`,
+                `${BASE_URL}/api/pets/${petId}`,
                 {
                     withCredentials: true
                 }
             )
             .then(() => {
-
-                // Remove pet from the page immediately
                 setPets((previousPets) =>
                     previousPets.filter(
                         (pet) => pet.id !== petId
                     )
                 );
 
+                setPetToDelete(null);
                 setPetMessage("Pet deleted successfully");
             })
             .catch((error) => {
@@ -264,7 +278,7 @@ const Profile = () => {
 
         axios
             .put(
-                `http://localhost:5000/api/appointments/${appointmentId}/cancel`,
+                `${BASE_URL}/api/appointments/${appointmentId}/cancel`,
                 {},
                 {
                     withCredentials: true
@@ -294,7 +308,7 @@ const Profile = () => {
     const handleLogout = () => {
         axios
             .post(
-                "http://localhost:5000/api/auth/logout",
+                `${BASE_URL}/api/auth/logout`,
                 {},
                 {
                     withCredentials: true
@@ -344,6 +358,14 @@ const Profile = () => {
                     </div>
 
                 </section>
+
+                {/* external api */}
+                <div className="weather-card">
+                    <span>Amman, Jordan</span>
+                    &nbsp;
+                    &nbsp;
+                    <strong>{temperature}°C</strong>
+                </div>
 
 
                 {/* Owner Information */}
@@ -703,9 +725,7 @@ const Profile = () => {
 
                                             <button
                                                 className="small-outline-btn"
-                                                onClick={() =>
-                                                    handleDeletePet(pet.id)
-                                                }
+                                                onClick={() => setPetToDelete(pet)}
                                             >
                                                 Delete
                                             </button>
@@ -828,6 +848,65 @@ const Profile = () => {
                 </section>
 
             </main>
+
+            {petToDelete && (
+                <>
+                    <div
+                        className="modal show d-block"
+                        tabIndex="-1"
+                    >
+                        <div className="modal-dialog modal-dialog-centered">
+
+                            <div className="modal-content">
+
+                                <div className="modal-header">
+                                    <h5 className="modal-title">
+                                        Delete Pet
+                                    </h5>
+
+                                    <button
+                                        type="button"
+                                        className="btn-close"
+                                        onClick={() => setPetToDelete(null)}
+                                    />
+                                </div>
+
+                                <div className="modal-body">
+                                    <p>
+                                        Are you sure you want to delete this pet?
+                                    </p>
+                                </div>
+
+                                <div className="modal-footer">
+
+                                    <button
+                                        type="button"
+                                        className="btn btn-secondary"
+                                        onClick={() => setPetToDelete(null)}
+                                    >
+                                        Cancel
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        className="btn btn-danger"
+                                        onClick={() =>
+                                            handleDeletePet(petToDelete.id)
+                                        }
+                                    >
+                                        Delete
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div className="modal-backdrop show"></div>
+                </>
+            )}
 
             <Footer />
 
