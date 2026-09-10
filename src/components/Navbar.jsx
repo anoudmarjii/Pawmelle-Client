@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Navbar.css";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
+
+  const navigate = useNavigate(); //for logout
 
   useEffect(() => {
     axios
@@ -19,7 +21,7 @@ const Navbar = () => {
       });
   }, []);
 
-
+  
   return (
     <nav className="navbar navbar-expand-md">
       <div className="container-fluid p-0">
