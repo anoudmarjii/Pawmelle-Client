@@ -1,14 +1,32 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "./Navbar.css";
 
 const Navbar = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/auth/me", {
+        withCredentials: true
+      })
+      .then((response) => {
+        setUser(response.data.user);
+      })
+      .catch(() => {
+        setUser(null);
+      });
+  }, []);
+
+
   return (
     <nav className="navbar navbar-expand-md">
       <div className="container-fluid p-0">
 
-        <a href="#home" className="navbar-brand navbar-logo">
+        <Link to="/" className="navbar-brand navbar-logo">
           PAWMELLE
-        </a>
+        </Link>
 
         <button
           className="navbar-toggler"
@@ -27,14 +45,20 @@ const Navbar = () => {
           id="pawmelleNavbar"
         >
           <div className="navbar-nav ms-auto navbar-links">
-            <a href="#home" className="nav-link">Home</a>
+            <Link to="/" className="nav-link">Home</Link>
             <a href="#services" className="nav-link">Services</a>
             <a href="#how-it-works" className="nav-link">How It Works</a>
             <a href="#contact" className="nav-link">Contact</a>
 
-            <Link to="/login" className="nav-link">
-              Sign In
-            </Link>
+            {user ? (
+              <Link to="/profile" className="nav-link">
+                Profile
+              </Link>
+            ) : (
+              <Link to="/login" className="nav-link">
+                Sign In
+              </Link>
+            )}
           </div>
         </div>
 
