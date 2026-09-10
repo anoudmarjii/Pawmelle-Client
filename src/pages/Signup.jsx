@@ -9,6 +9,8 @@ import signupImg from "../assets/signup.png";
 
 import "./Signup.css";
 
+const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
 const Signup = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -30,7 +32,7 @@ const Signup = () => {
         }
 
         axios
-            .post("http://localhost:5000/api/auth/signup", {
+            .post(`${BASE_URL}/api/auth/signup`, {
                 name,
                 email,
                 phone,

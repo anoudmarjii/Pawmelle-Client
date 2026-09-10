@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import Navbar from "../components/navbar";
 import ServiceCard from "../components/ServiceCard";
@@ -11,12 +12,14 @@ import ownerPetImage from "../assets/owner-pet.png";
 
 import "./Home.css";
 
+const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
 const Home = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
         axios
-            .get("http://localhost:5000/api/services")
+            .get(`${BASE_URL}/api/services`)
             .then((response) => {
                 setServices(response.data);
             })
@@ -28,6 +31,8 @@ const Home = () => {
     const handleBook = (service) => {
         console.log("Selected service:", service);
     };
+
+    const navigate = useNavigate();
 
 
     return (
@@ -45,9 +50,12 @@ const Home = () => {
                     <p>Simple, reliable care for your pet — all in one place.</p>
 
                     <div className="hero-buttons">
-                        <a href="#services" className="primary-btn">
+                        <button
+                            className="primary-btn"
+                            onClick={() => navigate("/booking")}
+                        >
                             Book Appointment →
-                        </a>
+                        </button>
 
                         <a href="#services" className="secondary-btn">
                             Our Services →
@@ -83,7 +91,9 @@ const Home = () => {
                         <ServiceCard
                             key={service.id}
                             service={service}
-                            onBook={handleBook}
+                            onBook={() =>
+                                navigate(`/booking?service=${service.id}`)
+                            }
                         />
                     ))}
 

@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Navbar.css";
+
+const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
 
   const navigate = useNavigate(); //for logout
 
+  const location = useLocation();
+
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/auth/me", {
+      .get(`${BASE_URL}/api/auth/me`, {
         withCredentials: true
       })
       .then((response) => {
@@ -19,7 +23,7 @@ const Navbar = () => {
       .catch(() => {
         setUser(null);
       });
-  }, []);
+  }, [location.pathname]);
 
   
   return (
@@ -48,9 +52,9 @@ const Navbar = () => {
         >
           <div className="navbar-nav ms-auto navbar-links">
             <Link to="/" className="nav-link">Home</Link>
-            <a href="#services" className="nav-link">Services</a>
-            <a href="#how-it-works" className="nav-link">How It Works</a>
-            <a href="#contact" className="nav-link">Contact</a>
+            <a href="/#services" className="nav-link">Services</a>
+            <a href="/#how-it-works" className="nav-link">How It Works</a>
+            <a href="/#contact" className="nav-link">Contact</a>
 
             {user ? (
               <Link to="/profile" className="nav-link">
